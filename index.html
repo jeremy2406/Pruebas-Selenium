@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>Restaurante Gourmet</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#reservas">Reservas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Bienvenidos a nuestro Restaurante</h2>
+        <p>Disfruta de los mejores platos y una experiencia única.</p>
+    </section>
+
+    <section id="menu">
+        <h2>Nuestro Menú</h2>
+        <div class="platos">
+          
+            <article>
+                <h3>Mangú con lo tre golpe</h3>
+                <img src="Imagenes/el-mangu.jpg" alt="Mangú">
+                <p>El mangú que todo dominicano desea por las mañanas al despertar</p>
+            </article>
+            <article>
+                <h3>Bandera Dominicana</h3>
+                <img src="Imagenes/plato-dominicano-1024x683.jpg" alt="Bandera plato-dominicano">
+                <p>Una comida que baja bien de desayuno, comida, merienda y cena. Lo mejor que hay.</p>
+            </article>
+            <article>
+                <h3>Sancocho</h3>
+                <img src="Imagenes/Sancocho Dominicano.JPG" alt="Sancocho">
+                <p>Otro plato delicioso con la de to, y baja en cualquier momento.</p>
+            </article>
+         
+        </div>
+    </section>
+
+    <section id="reservas">
+        <h2>Haz tu Reserva</h2>
+        <form id="form-reservas" action="guardar_reserva.php" method="POST">
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="fecha">Fecha de la reserva:</label>
+            <input type="date" id="fecha" name="fecha" required>
+
+            <label for="personas">Número de personas:</label>
+            <input type="number" id="personas" name="personas" min="1" required>
+
+            <label for="comentarios">Comentarios adicionales:</label>
+            <textarea id="comentarios" name="comentarios"></textarea>
+
+            <button type="submit">Enviar Reserva</button>
+        </form>
+    </section>
+
+    
+    <footer id="contacto">
+        <h2>Contacto</h2>
+        <p>Teléfono: (555) 123-4567</p>
+        <p>Email: contacto@restaurante.com</p>
+        <p>Dirección: Calle Falsa 123, Ciudad, País</p>
+
+        <p>&copy; 2024 Restaurante Gourmet. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
