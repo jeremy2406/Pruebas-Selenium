@@ -1,47 +1,80 @@
-
 services:
-  selenium-hub:
-    image: selenium/hub:4.1.0
-    container_name: selenium-hub
-    ports:
-      - "4444:4444"
-
   chrome:
-    image: selenium/node-chrome:4.1.0
-    volumes:
-      - /dev/shm:/dev/shm
+    image: selenium/node-chrome:4.25.0-20241010
+    shm_size: 2gb
     depends_on:
       - selenium-hub
     environment:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - VNC_NO_PASSWORD=1
+      - SE_NODE_MAX_SESSIONS=2
 
-  chrome-video:
-    image: selenium/video:latest
+  edge:
+    image: selenium/node-edge:4.25.0-20241010
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - VNC_NO_PASSWORD=1
+      - SE_NODE_MAX_SESSIONS=2
+
+  firefox:
+    image: selenium/node-firefox:4.25.0-20241010
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - VNC_NO_PASSWORD=1
+      - SE_NODE_MAX_SESSIONS=2
+
+  chrome_video:
+    image: selenium/video:ffmpeg-7.0.2-20241010
+    volumes:
+      - ./Videos:/videos
     depends_on:
       - chrome
     environment:
       - DISPLAY_CONTAINER_NAME=chrome
-    volumes:
-      - ./videos:/videos
+      - SE_NODE_GRID_URL=http://selenium-hub:4444
+      - FILE_NAME=chrome_video.mp4
+      - SE_VIDEO_FILE_NAME=auto
 
-  firefox:
-    image: selenium/node-firefox:4.1.0
+  edge_video:
+    image: selenium/video:ffmpeg-7.0.2-20241010
     volumes:
-      - /dev/shm:/dev/shm
+      - ./Videos:/videos
     depends_on:
-      - selenium-hub
+      - edge
     environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - DISPLAY_CONTAINER_NAME=edge
+      - SE_NODE_GRID_URL=http://selenium-hub:4444
+      - FILE_NAME=edge_video.mp4
+      - SE_VIDEO_FILE_NAME=auto
 
-  firefox-video:
-    image: selenium/video:latest
+  firefox_video:
+    image: selenium/video:ffmpeg-7.0.2-20241010
+    volumes:
+      - ./Videos:/videos
     depends_on:
       - firefox
     environment:
       - DISPLAY_CONTAINER_NAME=firefox
-    volumes:
-      - ./videos:/videos
+      - SE_NODE_GRID_URL=http://selenium-hub:4444
+      - FILE_NAME=firefox_video.mp4
+      - SE_VIDEO_FILE_NAME=auto
+
+  selenium-hub:
+    image: selenium/hub:4.25.0-20241010
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
