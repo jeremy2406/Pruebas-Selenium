@@ -7,7 +7,7 @@
     "test": "node selenium.js",
     "test:funcional": "node P-funcional.js",
     "test:regresion": "node P-regresion.js",
-    "test:unitaria": "node P-unitaria.js"
+    "test:unitaria": "node p-unitaria.js"
   },
   "author": "",
   "license": "ISC",
