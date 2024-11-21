@@ -24,24 +24,26 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install Chromium and ChromeDriver
+      - name: Install Chrome and ChromeDriver
         run: |
           sudo apt-get update
+          sudo apt-get install -y wget
           sudo apt-get install -y chromium-browser
-          sudo apt-get install -y chromium-chromedriver
-          sudo ln -s /usr/bin/chromedriver /usr/local/bin/chromedriver
-
-      - name: Set ChromeDriver permissions
-        run: sudo chmod +x /usr/local/bin/chromedriver
-
-      - name: Run Unitaria Test
-        run: npm run test:unitaria
+          CHROMIUM_PATH=$(which chromium-browser)
+          wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+          echo "CHROMIUM_PATH=$CHROMIUM_PATH"
 
       - name: Run Funcional Test
         run: npm run test:funcional  
 
-      - name: Run Integration Test
-        run: npm run test:integracion
-
       - name: Run Regression Test
-        run: npm run test:regresion
+        run: npm run test:regresion  
+
+      - name: Run Selenium Test
+        run: npm run test  
+
+      - name: Run Unitaria Test
+        run: npm run test:unitaria 
