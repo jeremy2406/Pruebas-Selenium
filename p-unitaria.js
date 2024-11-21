@@ -1,30 +1,30 @@
 const { Builder, By, until } = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
+
+let options = new chrome.Options();
+options.setChromeBinaryPath('/usr/bin/chromium-browser');
+
+let driver = new Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(options)
+    .build();
 
 async function testUnitaria() {
-    let driver = await new Builder().forBrowser('chrome').build();
     try {
-        // Abrir la página
-        console.log("Abriendo la página...");
         await driver.get('http://localhost/Pruebas Selenium/index.html');
-        await driver.sleep(3000); // Pausa de 3 segundos para observar
+        await driver.sleep(3000);
 
-        // Ir a la sección "Menú"
-        console.log("Navegando a la sección 'Menú'...");
         const menuLink = await driver.findElement(By.css('a[href="#menu"]'));
         await menuLink.click();
-        await driver.sleep(3000); // Pausa de 3 segundos para observar
+        await driver.sleep(3000);
 
-        // Verificar que la sección "Menú" está visible
-        console.log("Verificando visibilidad de la sección 'Menú'...");
         const menuSection = await driver.findElement(By.id('menu'));
         await driver.wait(until.elementIsVisible(menuSection), 10000);
-        await driver.sleep(3000); // Pausa de 3 segundos para observar
+        await driver.sleep(3000);
 
         console.log('Prueba unitaria completada: Sección Menú visible');
     } finally {
-        // Cerrar el navegador
-        console.log("Cerrando el navegador...");
-        await driver.sleep(3000); // Pausa final para observar
+        await driver.sleep(3000);
         await driver.quit();
     }
 }
