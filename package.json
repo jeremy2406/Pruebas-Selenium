@@ -4,17 +4,18 @@
   "description": "Pruebas automatizadas con Selenium",
   "main": "index.js",
   "scripts": {
-    "test": "node selenium.js",  
-    "test:funcional": "node P-funcional.js", 
-    "test:regresion": "node P-regresion.js",  
-    "test:unitaria": "node P-unitaria.js" 
+    "test": "node selenium.js",
+    "test:funcional": "node P-funcional.js",
+    "test:regresion": "node P-regresion.js",
+    "test:unitaria": "node P-unitaria.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "selenium-webdriver": "^4.0.0", 
-    "chromedriver": "^114.0.5735.90",  
-    "mocha": "^10.0.0"  
+    "mocha": "^10.0.0",
+    "selenium-webdriver": "^4.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "chromedriver": "^131.0.1"
+  }
 }
